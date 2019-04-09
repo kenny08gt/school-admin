@@ -1,5 +1,7 @@
 /** When your routing table is too long, you can split it into small modules**/
 import Layout from '@/views/layout/Layout';
+import addLayout from '@/views/courses/Add';
+import listLayout from '@/views/courses/list';
 
 const coursesRouter = {
   path: '/courses',
@@ -13,13 +15,13 @@ const coursesRouter = {
   children: [
     {
       path: 'add',
-      component: () => import('../../views/courses/Add'),
+      component: () => addLayout,
       name: 'AddCourse',
       meta: { title: 'Add Course', noCache: true },
     },
     {
       path: 'list',
-      component: () => import('../../views/courses/list'),
+      component: () => listLayout,
       name: 'listCourses',
       meta: { title: 'List Courses', noCache: true },
     },
