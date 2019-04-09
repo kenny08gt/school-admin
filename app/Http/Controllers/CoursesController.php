@@ -16,7 +16,6 @@ class CoursesController extends Controller
 
   public function getList(Request $request)
   {
-    dd('hi');
     $limit = $request->get('limit');
     $total = $request->get('total');
 

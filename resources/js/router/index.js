@@ -13,7 +13,7 @@ import Layout from '../views/layout/Layout';
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
 // import tableRouter from './modules/table';
-// import exampleRouter from './modules/example';
+import exampleRouter from './modules/example';
 // import nestedRouter from './modules/nested';
 // import errorRouter from './modules/error';
 // import excelRouter from './modules/excel';
@@ -146,7 +146,7 @@ export const asyncRouterMap = [
   // tableRouter,
   professorRouter,
   coursesRouter,
-  // exampleRouter,
+  exampleRouter,
   // {
   //   path: '/tab',
   //   component: Layout,

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class LaravueController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('laravue');
     }

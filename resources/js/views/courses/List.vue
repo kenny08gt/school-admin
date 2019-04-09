@@ -6,6 +6,26 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
+      <el-table-column align="left" label="Name">
+        <template slot-scope="scope">
+          <span>{{ scope.row.name }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="left" label="Description">
+        <template slot-scope="scope">
+          <span>{{ scope.row.description }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="left" label="Grade">
+        <template slot-scope="scope">
+          <span>{{ scope.row.grade_id }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="left" label="Created at">
+        <template slot-scope="scope">
+          <span>{{ scope.row.created_at }}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
   </div>
@@ -46,8 +66,9 @@ export default {
     getList() {
       this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items;
-        this.total = response.data.total;
+        console.log('response', response);
+        this.list = response.items;
+        this.total = response.total;
         this.listLoading = false;
       }).catch((error) => {
         console.log('error', error);

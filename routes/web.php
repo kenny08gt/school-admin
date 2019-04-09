@@ -18,3 +18,6 @@
 Route::post('/courses/add', 'CoursesController@add');
 
 Route::get('/{any}', 'LaravueController@index')->where('any', ".*");
+//Route::get('/get', function(){
+//  dd('hi');
+//});
