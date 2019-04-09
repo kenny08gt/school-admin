@@ -32,7 +32,7 @@
 import { mapGetters } from 'vuex';
 import Breadcrumb from '@core/components/Breadcrumb';
 import Hamburger from '@core/components/Hamburger';
-import LangSelect from '@core/components/LangSelect';
+import LangSelect from '../../../lang/LangSelect';
 
 export default {
   name: 'LNavbar',
