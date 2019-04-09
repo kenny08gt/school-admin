@@ -1,7 +1,7 @@
 /** When your routing table is too long, you can split it into small modules**/
 import Layout from '@/views/layout/Layout';
 import addLayout from '@/views/courses/Add';
-import listLayout from '@/views/courses/list';
+import listLayout from '@/views/courses/List';
 
 const coursesRouter = {
   path: '/courses',
