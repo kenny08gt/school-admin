@@ -7,6 +7,9 @@ import router from '@/router';
 import i18n from './lang'; // Internationalization
 import '@/icons'; // icon
 import '@/permission'; // permission control
+const axios = require('axios');
+
+window.axios = axios;
 
 import * as filters from './filters'; // global filters
 

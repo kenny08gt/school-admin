@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/{any}', 'LaravueController@index')->where('any', '.*');
+Route::post('/courses/add', 'CoursesController@add');
+
+Route::get('/#/{any}', 'LaravueController@index')->where('any', ".*");

@@ -14,6 +14,8 @@ use App\Laravue\Faker;
 |
 */
 
+Route::get('/courses', 'CoursesController@getList');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
