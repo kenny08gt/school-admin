@@ -13,13 +13,13 @@ const professorRouter = {
   children: [
     {
       path: 'add',
-      component: () => import('@/views/professors/Add'),
+      component: () => import('../../views/professors/Add'),
       name: 'AddProfessor',
       meta: { title: 'Add Professor', noCache: true },
     },
     {
       path: 'list',
-      component: () => import('@/views/professors/list'),
+      component: () => import('../../views/professors/list'),
       name: 'listProfessors',
       meta: { title: 'List Professors', noCache: true },
     },

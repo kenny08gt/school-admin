@@ -13,13 +13,13 @@ const coursesRouter = {
   children: [
     {
       path: 'add',
-      component: () => import('@/views/courses/Add'),
+      component: () => import('../../views/courses/Add'),
       name: 'AddCourse',
       meta: { title: 'Add Course', noCache: true },
     },
     {
       path: 'list',
-      component: () => import('@/views/courses/list'),
+      component: () => import('../../views/courses/list'),
       name: 'listCourses',
       meta: { title: 'List Courses', noCache: true },
     },
