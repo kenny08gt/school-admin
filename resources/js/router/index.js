@@ -20,6 +20,7 @@ import exampleRouter from './modules/example';
 // import permissionRouter from './modules/permission';
 import professorRouter from './modules/professors';
 import coursesRouter from './modules/courses';
+import gradesRouter from './modules/grades';
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -147,6 +148,7 @@ export const asyncRouterMap = [
   professorRouter,
   coursesRouter,
   exampleRouter,
+  gradesRouter,
   // {
   //   path: '/tab',
   //   component: Layout,

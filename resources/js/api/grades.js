@@ -2,15 +2,15 @@ import request from '@/utils/request';
 
 export function fetchList(query) {
   return request({
-    url: '/courses',
+    url: '/grades',
     method: 'post',
     params: query,
   });
 }
 
-export function createCourse(query) {
+export function createGrade(query) {
   return request({
-    url: '/courses/add',
+    url: '/grades/add',
     method: 'post',
     params: query,
   });

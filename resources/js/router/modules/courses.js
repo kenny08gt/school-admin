@@ -23,18 +23,6 @@ const coursesRouter = {
       name: 'listCourses',
       meta: { title: 'List Courses', noCache: true },
     },
-    // {
-    //   path: 'line',
-    //   component: () => import('@/views/charts/Line'),
-    //   name: 'LineChart',
-    //   meta: { title: 'lineChart', noCache: true },
-    // },
-    // {
-    //   path: 'mixchart',
-    //   component: () => import('@/views/charts/MixChart'),
-    //   name: 'MixChart',
-    //   meta: { title: 'mixChart', noCache: true },
-    // },
   ],
 };
 

@@ -15,6 +15,10 @@ use App\Laravue\Faker;
 */
 
 Route::post('/courses', 'CoursesController@getList');
+Route::post('/courses/add', 'CoursesController@add');
+
+Route::post('/grades', 'GradesController@getList');
+Route::post('/grades/add', 'GradesController@add');
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();

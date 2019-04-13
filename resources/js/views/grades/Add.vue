@@ -1,16 +1,8 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="course" label-width="120px">
-      <el-form-item label="Course name">
-        <el-input v-model="course.name"/>
-      </el-form-item>
-      <el-form-item label="Grade ">
-        <el-select v-model="course.grade_id" placeholder="please select the grades" :multiple="false">
-          <el-option v-for="(grade) in grades" :key="grade.key" :value="grade.key" :label="grade.name"/>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Description">
-        <el-input v-model="course.description" type="textarea"/>
+    <el-form ref="form" :model="grade" label-width="120px">
+      <el-form-item label="Grade name">
+        <el-input v-model="grade.name"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
@@ -22,32 +14,22 @@
           </template>
         </el-button>
         <el-button @click="onCancel">Cancel</el-button>
-        <el-button v-if="is_editing" @click="newCourse">New Course</el-button>
+        <el-button v-if="is_editing" @click="newGrade">New Grade</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { createCourse } from '@/api/courses';
+import { createGrade } from '../../api/grades';
 export default {
   name: 'Add',
   data() {
     return {
-      course: {
+      grade: {
         id: 0,
         name: '',
-        grade_id: '',
-        description: '',
       },
-      grades: [
-        {
-          'key': '1',
-          'name': 'primero' },
-        {
-          'key': '2',
-          'name': 'segundo' },
-      ],
       is_editing: false,
     };
   },
@@ -55,12 +37,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      createCourse(this.course).then(data => {
-        console.log('data', data);
-        this.course.id = data.id;
+      createGrade(this.grade).then(data => {
+        this.grade.id = data.id;
         this.is_editing = true;
         this.$message('Success!');
-        // this.$router.push({ path: '/courses/list' });
+        // this.$router.push({ path: '/grades/list' });
       }).catch((error) => {
         console.log('error', error);
         this.$message({
@@ -74,15 +55,13 @@ export default {
         message: 'cancel!',
         type: 'warning',
       });
-      this.newCourse();
+      this.newGrade();
     },
-    newCourse() {
+    newGrade() {
       this.is_editing = false;
-      this.course = {
+      this.grade = {
         id: 0,
         name: '',
-        grade_id: '',
-        description: '',
       };
     },
   },
