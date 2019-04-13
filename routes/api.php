@@ -20,6 +20,9 @@ Route::post('/courses/add', 'CoursesController@add');
 Route::post('/grades', 'GradesController@getList');
 Route::post('/grades/add', 'GradesController@add');
 
+Route::post('/professors', 'ProfessorsController@getList');
+Route::post('/professors/add', 'ProfessorsController@add');
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});

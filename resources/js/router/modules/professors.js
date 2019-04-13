@@ -5,9 +5,9 @@ const professorRouter = {
   path: '/professors',
   component: Layout,
   redirect: 'noredirect',
-  name: 'Professors',
+  name: 'professors',
   meta: {
-    title: 'Professors',
+    title: 'professors',
     icon: 'peoples',
   },
   children: [

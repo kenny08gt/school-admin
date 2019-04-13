@@ -38,7 +38,7 @@ export default {
   methods: {
     onSubmit() {
       createGrade(this.grade).then(data => {
-        this.grade.id = data.id;
+        this.grade.id = data[0].id;
         this.is_editing = true;
         this.$message('Success!');
         // this.$router.push({ path: '/grades/list' });
@@ -51,11 +51,12 @@ export default {
       });
     },
     onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning',
-      });
+      // this.$message({
+      //   message: 'cancel!',
+      //   type: 'warning',
+      // });
       this.newGrade();
+      this.$router.back();
     },
     newGrade() {
       this.is_editing = false;

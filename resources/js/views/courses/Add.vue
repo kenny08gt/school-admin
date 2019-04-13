@@ -57,7 +57,7 @@ export default {
     onSubmit() {
       createCourse(this.course).then(data => {
         console.log('data', data);
-        this.course.id = data.id;
+        this.course.id = data[0].id;
         this.is_editing = true;
         this.$message('Success!');
         // this.$router.push({ path: '/courses/list' });
@@ -70,11 +70,12 @@ export default {
       });
     },
     onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning',
-      });
+      // this.$message({
+      //   message: 'cancel!',
+      //   type: 'warning',
+      // });
       this.newCourse();
+      this.$router.back();
     },
     newCourse() {
       this.is_editing = false;

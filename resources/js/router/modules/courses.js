@@ -5,9 +5,9 @@ const coursesRouter = {
   path: '/courses',
   component: Layout,
   redirect: 'noredirect',
-  name: 'Courses',
+  name: 'courses',
   meta: {
-    title: 'Courses',
+    title: 'courses',
     icon: 'documentation',
   },
   children: [

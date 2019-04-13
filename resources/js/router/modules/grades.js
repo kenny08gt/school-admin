@@ -5,10 +5,10 @@ const gradesRouter = {
   path: '/grades',
   component: Layout,
   redirect: 'noredirect',
-  name: 'Grades',
+  name: 'grades',
   meta: {
-    title: 'Grades',
-    icon: 'documentation',
+    title: 'grades',
+    icon: 'list',
   },
   children: [
     {
