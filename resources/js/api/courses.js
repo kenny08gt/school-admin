@@ -15,3 +15,11 @@ export function createCourse(query) {
     params: query,
   });
 }
+
+export function deleteCourse(query) {
+  return request({
+    url: '/courses',
+    method: 'delete',
+    params: query,
+  });
+}

@@ -29,23 +29,29 @@
       <el-table-column align="center" label="Action">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" icon="el-icon-edit" circle :course="scope"></el-button>
-            <el-button type="danger" icon="el-icon-delete" circle :course="scope"></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle @click="editCourse(scope.row)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle @click="deleteCourseRequest(scope.row)"></el-button>
           </el-row>
         </template>
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <edit-course-modal ref="editCourseModal"></edit-course-modal>
   </div>
 </template>
 
 <script>
-import { fetchList } from '@/api/courses';
-import Pagination from '@core/components/Pagination'; // Secondary package based on el-pagination
+import { fetchList, deleteCourse } from '@/api/courses';
+import Pagination from '@core/components/Pagination';
+import editModal from './modals/edit';
+import Course from '@/objects/course';
 
 export default {
   name: 'coursesList',
-  components: { Pagination },
+  components: {
+    Pagination,
+    'edit-course-modal': editModal,
+  },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -74,8 +80,9 @@ export default {
     getList() {
       this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        console.log('response', response);
-        this.list = response.items;
+        this.list = response.items.map(function(item, index) {
+          return new Course(item);
+        });
         this.total = response.total;
         this.listLoading = false;
       }).catch((error) => {
@@ -89,6 +96,31 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val;
       this.getList();
+    },
+    editCourse(course) {
+      this.$refs.editCourseModal.show(course);
+    },
+    deleteCourseRequest(course) {
+      this.$confirm('This will permanently delete this. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(() => {
+        deleteCourse(course).then((data) => {
+          const index = this.list.indexOf(course);
+          this.list.splice(index, 1);
+          this.$message({
+            type: 'success',
+            message: 'Delete completed',
+          });
+        }).catch((error) => {
+          console.log('error', error);
+          this.$message({
+            type: 'info',
+            message: 'Something went wrong',
+          });
+        });
+      });
     },
   },
 };

@@ -21,7 +21,14 @@
             Create
           </template>
         </el-button>
-        <el-button @click="onCancel">Cancel</el-button>
+        <el-button @click="onCancel">
+          <template v-if="is_editing">
+            Back
+          </template>
+          <template v-else>
+            Cancel
+          </template>
+        </el-button>
         <el-button v-if="is_editing" @click="newCourse">New Course</el-button>
       </el-form-item>
     </el-form>

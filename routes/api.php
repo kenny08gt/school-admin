@@ -16,6 +16,7 @@ use App\Laravue\Faker;
 
 Route::post('/courses', 'CoursesController@getList');
 Route::post('/courses/add', 'CoursesController@add');
+Route::delete('/courses', 'CoursesController@delete');
 
 Route::post('/grades', 'GradesController@getList');
 Route::post('/grades/add', 'GradesController@add');

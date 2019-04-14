@@ -23,4 +23,12 @@ class CoursesController extends Controller
 
     return response(['items' => $courses, 'total' => 10], 200);
   }
+
+    public function delete(Request $request)
+    {
+        $course = Course::findOrFail($request->get('id'));
+        $course->delete();
+
+        return response(['message' => 'Course deleted', 'course' => $course], 200);
+  }
 }

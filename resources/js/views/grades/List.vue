@@ -88,8 +88,6 @@ export default {
       this.getList();
     },
     editGrade(grade) {
-      console.log('grade ', grade);
-      // editModal.
       this.$refs.editGradeModal.show(grade);
     },
     deleteGradeRequest(grade) {
