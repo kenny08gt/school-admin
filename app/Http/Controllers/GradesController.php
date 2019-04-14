@@ -22,4 +22,12 @@ class GradesController extends Controller
 
         return response(['items' => $grades, 'total' => 10], 200);
     }
+
+    public function delete(Request $request)
+    {
+        $grade = Grade::findOrFail($request->get('id'));
+        $grade->delete();
+
+        return response(['message' => 'Grade deleted', 'grade' => $grade], 200);
+    }
 }

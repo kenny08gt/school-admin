@@ -16,18 +16,32 @@
           <span>{{ scope.row.created_at }}</span>
         </template>
       </el-table-column>
+      <el-table-column align="center" label="Action">
+        <template slot-scope="scope">
+          <el-row>
+            <el-button type="primary" icon="el-icon-edit" circle @click="editGrade(scope.row)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle @click="deleteGradeRequest(scope.row)"></el-button>
+          </el-row>
+        </template>
+      </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <edit-grade-modal ref="editGradeModal"></edit-grade-modal>
   </div>
 </template>
 
 <script>
-import { fetchList } from '@/api/grades';
+import { fetchList, deleteGrade } from '@/api/grades';
 import Pagination from '@core/components/Pagination'; // Secondary package based on el-pagination
+import editModal from './modals/edit';
+import Grade from '@/objects/grade';
 
 export default {
   name: 'gradesList',
-  components: { Pagination },
+  components: {
+    Pagination,
+    'edit-grade-modal': editModal,
+  },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -56,7 +70,9 @@ export default {
     getList() {
       this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        this.list = response.items;
+        this.list = response.items.map((item, index) => {
+          return new Grade(item);
+        });
         this.total = response.total;
         this.listLoading = false;
       }).catch((error) => {
@@ -70,6 +86,34 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val;
       this.getList();
+    },
+    editGrade(grade) {
+      console.log('grade ', grade);
+      // editModal.
+      this.$refs.editGradeModal.show(grade);
+    },
+    deleteGradeRequest(grade) {
+      console.log('grade ', grade);
+      this.$confirm('This will permanently delete this. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(() => {
+        deleteGrade(grade).then((data) => {
+          const index = this.list.indexOf(grade);
+          this.list.splice(index, 1);
+          this.$message({
+            type: 'success',
+            message: 'Delete completed',
+          });
+        }).catch((error) => {
+          console.log('error', error);
+          this.$message({
+            type: 'info',
+            message: 'Something went wrong',
+          });
+        });
+      });
     },
   },
 };

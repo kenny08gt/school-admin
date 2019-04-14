@@ -7,7 +7,7 @@
         <el-input v-model="professor.name"/>
       </el-form-item>
       <el-form-item label="Email" :rules="[
-      { message: 'Please input email address', trigger: 'blur' },
+      { required: true, message: 'Please input email address', trigger: 'blur' },
       { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }]">
         <el-input type="email" v-model="professor.email"/>
       </el-form-item>

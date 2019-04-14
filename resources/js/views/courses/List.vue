@@ -26,6 +26,14 @@
           <span>{{ scope.row.created_at }}</span>
         </template>
       </el-table-column>
+      <el-table-column align="center" label="Action">
+        <template slot-scope="scope">
+          <el-row>
+            <el-button type="primary" icon="el-icon-edit" circle :course="scope"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle :course="scope"></el-button>
+          </el-row>
+        </template>
+      </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
   </div>

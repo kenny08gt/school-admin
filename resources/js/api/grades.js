@@ -15,3 +15,11 @@ export function createGrade(query) {
     params: query,
   });
 }
+
+export function deleteGrade(query) {
+  return request({
+    url: '/grades',
+    method: 'delete',
+    params: query,
+  });
+}
