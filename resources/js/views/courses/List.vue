@@ -23,7 +23,7 @@
       </el-table-column>
       <el-table-column align="left" label="Created at">
         <template slot-scope="scope">
-          <span>{{ scope.row.created_at }}</span>
+          <span>{{ scope.row.created_at | moment("LL") }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="Action">

@@ -26,8 +26,8 @@ Object.keys(filters).forEach(key => {
 Vue.config.productionTip = false;
 
 const moment = require('moment');
-require('moment/locale/es');
 require('moment/locale/en-ie');
+require('moment/locale/es');
 
 Vue.use(require('vue-moment'), {
   moment,
