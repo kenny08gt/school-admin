@@ -1,23 +1,12 @@
 <template>
   <el-dialog :title="$t('edit-grade-modal.title')" :visible.sync="dialogFormVisible">
-    <el-form ref="form" :model="grade" label-width="120px">
-      <el-form-item :label="$t('common.name')">
-        <el-input v-model="grade.name"/>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">{{$t('common.save-changes')}}</el-button>
-        <el-button @click="onCancel">{{$t('common.cancel')}}</el-button>
-      </el-form-item>
-    </el-form>
-    <!--<span slot="footer" class="dialog-footer">-->
-    <!--<el-button @click="dialogFormVisible = false">Cancel</el-button>-->
-    <!--<el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>-->
-  <!--</span>-->
+    <grade-form :grade="grade" :is_editing="true" @on_submit="onSubmit" @on_cancel="onCancel"></grade-form>
   </el-dialog>
 </template>
 
 <script>
 import { createGrade } from '../../../api/grades';
+import gradeForm from '../components/form';
 export default {
   name: 'edit-grade-modal',
   data() {
@@ -59,6 +48,9 @@ export default {
       this.grade.name = this.previous_name;
       this.hide();
     },
+  },
+  components: {
+    'grade-form': gradeForm,
   },
 };
 </script>

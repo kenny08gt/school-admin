@@ -114,14 +114,15 @@ export default {
     size: 'Global Size',
   },
   login: {
-    title: 'Laravel Vue Admin',
-    logIn: 'Iniciar sersion',
+    title: 'Schoool Kit',
+    logIn: 'Iniciar sesion',
     username: 'Username',
     email: 'Email',
     password: 'Password',
     any: 'cualquiera',
     thirdparty: 'o conectar con',
     thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !',
+    'sign-in': 'Iniciar sesion',
   },
   documentation: {
     documentation: 'Documentation',

@@ -26,7 +26,7 @@
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          Sign in
+          {{$t('login.logIn')}}
         </el-button>
       </el-form-item>
       <div class="tips">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import LangSelect from '@core/components/LangSelect';
+import LangSelect from '@/lang/LangSelect';
 import { isEmailValid } from '@/utils/validate';
 
 export default {

@@ -1,34 +1,17 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="grade" label-width="120px">
-      <el-form-item :label="$t('common.name')">
-        <el-input v-model="grade.name"/>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">
-          <template v-if="is_editing">
-            {{$t('common.save-create')}}
-          </template>
-          <template v-else>
-            {{$t('common.create')}}
-          </template>
-        </el-button>
-        <el-button @click="onCancel">
-          <template v-if="is_editing">
-            {{$t('common.back')}}
-          </template>
-          <template v-else>
-            {{$t('common.cancel')}}
-          </template>
-        </el-button>
+    <grade-form :grade="grade" :is_editing="is_editing" @on_submit="onSubmit" @on_cancel="onCancel" @on_new_grade="newGrade"></grade-form>
+    <el-row>
+      <el-col :span="24">
         <el-button v-if="is_editing" @click="newGrade">{{$t('common.new-grade')}}</el-button>
-      </el-form-item>
-    </el-form>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import { createGrade } from '../../api/grades';
+import gradeForm from './components/form';
 export default {
   name: 'Add',
   data() {
@@ -41,6 +24,7 @@ export default {
     };
   },
   components: {
+    'grade-form': gradeForm,
   },
   methods: {
     onSubmit() {

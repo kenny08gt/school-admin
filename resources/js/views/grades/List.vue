@@ -65,7 +65,6 @@ export default {
   },
   created() {
     this.getList();
-    console.log(this.$t('common.delete-message'));
   },
   methods: {
     getList() {

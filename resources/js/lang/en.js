@@ -108,7 +108,7 @@ export default {
     size: 'Global Size',
   },
   login: {
-    title: 'Laravel Vue Admin',
+    title: 'School Kit',
     logIn: 'Log in',
     username: 'Username',
     email: 'Email',
