@@ -26,5 +26,5 @@ const i18n = new VueI18n({
   // set locale messages
   messages,
 });
-
+// Vue.moment.locale('es');
 export default i18n;
