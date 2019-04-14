@@ -13,7 +13,7 @@ import Layout from '../views/layout/Layout';
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
 // import tableRouter from './modules/table';
-import exampleRouter from './modules/example';
+// import exampleRouter from './modules/example';
 // import nestedRouter from './modules/nested';
 // import errorRouter from './modules/error';
 // import excelRouter from './modules/excel';
@@ -107,18 +107,18 @@ export const constantRouterMap = [
   //     },
   //   ],
   // },
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' },
-      },
-    ],
-  },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' },
+  //     },
+  //   ],
+  // },
 ];
 
 export default new Router({
@@ -129,25 +129,25 @@ export default new Router({
 
 export const asyncRouterMap = [
   // permissionRouter,
-  {
-    path: '/icon',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'icons', icon: 'icon', noCache: true },
-      },
-    ],
-  },
+  // {
+  //   path: '/icon',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/icons/index'),
+  //       name: 'Icons',
+  //       meta: { title: 'icons', icon: 'icon', noCache: true },
+  //     },
+  //   ],
+  // },
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
   professorRouter,
   coursesRouter,
-  exampleRouter,
+  // exampleRouter,
   gradesRouter,
   // {
   //   path: '/tab',
@@ -197,18 +197,18 @@ export const asyncRouterMap = [
   //   component: () => import('@/views/pdf/Download'),
   //   hidden: true,
   // },
-  {
-    path: '/i18n',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/i18n'),
-        name: 'I18n',
-        meta: { title: 'i18n', icon: 'international' },
-      },
-    ],
-  },
+  // {
+  //   path: '/i18n',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/i18n'),
+  //       name: 'I18n',
+  //       meta: { title: 'i18n', icon: 'international' },
+  //     },
+  //   ],
+  // },
   // {
   //   path: 'external-link',
   //   component: Layout,

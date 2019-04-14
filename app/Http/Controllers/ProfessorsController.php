@@ -23,4 +23,12 @@ class ProfessorsController extends Controller
 
         return response(['items' => $users, 'total' => 10], 200);
     }
+
+    public function delete(Request $request)
+    {
+        $professor = User::where('role', User::PROFESSOR_ROLE)->where('id', $request->get('id'))->first();
+        $professor->delete();
+
+        return response(['message' => 'User deleted', 'professor' => $professor], 200);
+    }
 }

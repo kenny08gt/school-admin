@@ -24,6 +24,7 @@ Route::delete('/grades', 'GradesController@delete');
 
 Route::post('/professors', 'ProfessorsController@getList');
 Route::post('/professors/add', 'ProfessorsController@add');
+Route::delete('/professors', 'ProfessorsController@delete');
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();

@@ -15,3 +15,11 @@ export function createProfessor(query) {
     params: query,
   });
 }
+
+export function deleteProfessor(query) {
+  return request({
+    url: '/professors',
+    method: 'delete',
+    params: query,
+  });
+}
