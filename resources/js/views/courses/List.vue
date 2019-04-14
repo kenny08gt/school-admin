@@ -6,27 +6,27 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Name">
+      <el-table-column align="left" :label="$t('common.name')">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Description">
+      <el-table-column align="left" :label="$t('common.description')">
         <template slot-scope="scope">
           <span>{{ scope.row.description }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Grade">
+      <el-table-column align="left" :label="$t('common.grade')">
         <template slot-scope="scope">
           <span>{{ scope.row.grade_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Created at">
+      <el-table-column align="left" :label="$t('common.created-at')">
         <template slot-scope="scope">
           <span>{{ scope.row.created_at | moment("LL") }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="Action">
+      <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
           <el-row>
             <el-button type="primary" icon="el-icon-edit" circle @click="editCourse(scope.row)"></el-button>
@@ -101,7 +101,7 @@ export default {
       this.$refs.editCourseModal.show(course);
     },
     deleteCourseRequest(course) {
-      this.$confirm('This will permanently delete this. Continue?', 'Warning', {
+      this.$confirm(this.$t('common.delete-message'), 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning',

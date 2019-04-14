@@ -1,7 +1,35 @@
 export default {
   common: {
-    back: 'Back',
-    return: 'Return',
+    'back': 'Back',
+    'return': 'Return',
+    'save-changes': 'Save Changes',
+    'create': 'Create',
+    'cancel': 'Cancel',
+    'name': 'Name',
+    'email': 'Email',
+    'role': 'Role',
+    'password': 'Password',
+    'description': 'Description',
+    'created-at': 'Created At',
+    'actions': 'Actions',
+    'grade': 'Grade',
+    'new-course': 'New Course',
+    'new-grade': 'New Grade',
+    'success': 'Success!',
+    'delete-message': 'This will permanently delete this. Continue?',
+  },
+  'edit-course-modal': {
+    'title': 'Edit Course',
+  },
+  'edit-grade-modal': {
+    'title': 'Edit Grade',
+  },
+  'edit-professor-modal': {
+    'title': 'Edit Professor',
+  },
+  errors: {
+    'email-required': 'Please input email address',
+    'email-type': 'Please input correct email address',
   },
   route: {
     dashboard: 'Dashboard',

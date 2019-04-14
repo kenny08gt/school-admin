@@ -1,7 +1,7 @@
 <template>
-  <el-dialog title="Edit Course" :visible.sync="dialogFormVisible">
+  <el-dialog :title="$t('edit-course-modal.title')" :visible.sync="dialogFormVisible">
     <el-form ref="form" :model="course" label-width="120px">
-      <el-form-item label="Course name">
+      <el-form-item :label="$t('common.name')">
         <el-input v-model="course.name"/>
       </el-form-item>
       <!--<el-form-item label="Grade ">-->
@@ -9,15 +9,15 @@
           <!--<el-option v-for="(grade) in grades" :key="grade.key" :value="grade.key" :label="grade.name"/>-->
         <!--</el-select>-->
       <!--</el-form-item>-->
-      <el-form-item label="Description">
+      <el-form-item :label="$t('common.description')">
         <el-input v-model="course.description" type="textarea"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
-            Save Changes
+            {{$t('common.save-changes')}}
         </el-button>
         <el-button @click="onCancel">
-            Cancel
+            {{$t('common.cancel')}}
         </el-button>
       </el-form-item>
     </el-form>

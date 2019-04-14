@@ -1,12 +1,12 @@
 <template>
-  <el-dialog title="Edit grade" :visible.sync="dialogFormVisible">
+  <el-dialog :title="$t('edit-grade-modal.title')" :visible.sync="dialogFormVisible">
     <el-form ref="form" :model="grade" label-width="120px">
-      <el-form-item label="Grade name">
+      <el-form-item :label="$t('common.name')">
         <el-input v-model="grade.name"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Save</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
+        <el-button type="primary" @click="onSubmit">{{$t('common.save-changes')}}</el-button>
+        <el-button @click="onCancel">{{$t('common.cancel')}}</el-button>
       </el-form-item>
     </el-form>
     <!--<span slot="footer" class="dialog-footer">-->

@@ -6,17 +6,17 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Name">
+      <el-table-column align="left" :label="$t('common.name')">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Created at">
+      <el-table-column align="left" :label="$t('common.created-at')">
         <template slot-scope="scope">
           <span>{{ scope.row.created_at | moment("LL") }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="Action">
+      <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
           <el-row>
             <el-button type="primary" icon="el-icon-edit" circle @click="editGrade(scope.row)"></el-button>
@@ -65,6 +65,7 @@ export default {
   },
   created() {
     this.getList();
+    console.log(this.$t('common.delete-message'));
   },
   methods: {
     getList() {
@@ -92,7 +93,7 @@ export default {
     },
     deleteGradeRequest(grade) {
       console.log('grade ', grade);
-      this.$confirm('This will permanently delete this. Continue?', 'Warning', {
+      this.$confirm(this.$t('common.delete-message'), 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning',

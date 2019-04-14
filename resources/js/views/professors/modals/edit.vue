@@ -1,13 +1,13 @@
 <template>
-  <el-dialog title="Edit Professor" :visible.sync="dialogFormVisible">
+  <el-dialog :title="$t('edit-professor-modal.title')" :visible.sync="dialogFormVisible">
     <el-form ref="form" :model="professor" label-width="120px">
-      <el-form-item label="Name"  :rules="[
+      <el-form-item :label="$t('common.name')"  :rules="[
       { required: true, message: 'Please input a name', trigger: 'blur' }]">
         <el-input v-model="professor.name"/>
       </el-form-item>
-      <el-form-item label="Email" :rules="[
-      { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }]">
+      <el-form-item :label="$t('common.email')" :rules="[
+      { required: true, message: $t('errors.email-required'), trigger: 'blur' },
+      { type: 'email', message: $t('errors.email-type'), trigger: ['blur', 'change'] }]">
         <el-input type="email" v-model="professor.email"/>
       </el-form-item>
       <!--<el-form-item v-if="!is_editing" label="Passoword" :rules="[-->
@@ -21,10 +21,10 @@
       <!--</el-form-item>-->
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
-          Save Changes
+          {{$t('common.save-create')}}
         </el-button>
         <el-button @click="onCancel">
-          Cancel
+          {{$t('common.cancel')}}
         </el-button>
       </el-form-item>
     </el-form>

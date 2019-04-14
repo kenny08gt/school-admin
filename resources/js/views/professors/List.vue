@@ -6,22 +6,22 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Name">
+      <el-table-column align="left" :label="$t('common.name')">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Email">
+      <el-table-column align="left" :label="$t('common.email')">
         <template slot-scope="scope">
           <span>{{ scope.row.email }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="left" label="Created at">
+      <el-table-column align="left" :label="$t('common.created-at')">
         <template slot-scope="scope">
           <span>{{ scope.row.created_at | moment("LL") }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="Action">
+      <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
           <el-row>
             <el-button type="primary" icon="el-icon-edit" circle @click="editProfessor(scope.row)"></el-button>
@@ -40,6 +40,7 @@ import { fetchList, deleteProfessor } from '@/api/professors';
 import Pagination from '@core/components/Pagination';
 import Professor from '@/objects/professor';
 import editProfessorModal from './modals/edit';
+
 export default {
   name: 'gradesList',
   components: {
@@ -95,9 +96,9 @@ export default {
       this.$refs.editProfessorModal.show(professor);
     },
     deleteProfessorRequest(professor) {
-      this.$confirm('This will permanently delete this. Continue?', 'Warning', {
+      this.$confirm(this.$t('common.delete-message'), 'Warning', {
         confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning',
       }).then(() => {
         deleteProfessor(professor).then((data) => {

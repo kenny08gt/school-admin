@@ -1,7 +1,35 @@
 export default {
   common: {
-    back: 'Atras',
-    return: 'Regresar',
+    'back': 'Atras',
+    'return': 'Regresar',
+    'save-changes': 'Guardar cambios',
+    'create': 'Crear',
+    'cancel': 'Cancelar',
+    'name': 'Nombre',
+    'email': 'Email',
+    'role': 'Role',
+    'password': 'Contraseña',
+    'description': 'Descripción',
+    'created-at': 'Creado el',
+    'actions': 'Acciones',
+    'grade': 'Grado',
+    'new-course': 'Crear otro curso',
+    'new-grade': 'Crear otro curso',
+    'success': 'Exito!',
+    'delete-message': 'Esto será borrado permanentemente. Desea continuar?',
+  },
+  'edit-course-modal': {
+    'title': 'Editar Curso',
+  },
+  'edit-grade-modal': {
+    'title': 'Editar Grado',
+  },
+  'edit-professor-modal': {
+    'title': 'Editar Profesor',
+  },
+  errors: {
+    'email-required': 'Ingresar un correo electronico',
+    'email-type': 'Ingresear un correo electronico valido',
   },
   route: {
     dashboard: 'Dashboard',

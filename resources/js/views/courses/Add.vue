@@ -1,35 +1,35 @@
 <template>
   <div class="app-container">
     <el-form ref="form" :model="course" label-width="120px">
-      <el-form-item label="Course name">
+      <el-form-item :label="$t('common.name')">
         <el-input v-model="course.name"/>
       </el-form-item>
-      <el-form-item label="Grade ">
+      <el-form-item :label="$t('common.grade')">
         <el-select v-model="course.grade_id" placeholder="please select the grades" :multiple="false">
           <el-option v-for="(grade) in grades" :key="grade.key" :value="grade.key" :label="grade.name"/>
         </el-select>
       </el-form-item>
-      <el-form-item label="Description">
+      <el-form-item :label="$t('common.description')">
         <el-input v-model="course.description" type="textarea"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
           <template v-if="is_editing">
-            Save Changes
+            {{$t('common.save-changes')}}
           </template>
           <template v-else>
-            Create
+            {{$t('common.create')}}
           </template>
         </el-button>
         <el-button @click="onCancel">
           <template v-if="is_editing">
-            Back
+            {{$t('common.back')}}
           </template>
           <template v-else>
-            Cancel
+            {{$t('common.cancel')}}
           </template>
         </el-button>
-        <el-button v-if="is_editing" @click="newCourse">New Course</el-button>
+        <el-button v-if="is_editing" @click="newCourse">{{$t('common.new-course')}}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -66,7 +66,7 @@ export default {
         console.log('data', data);
         this.course.id = data[0].id;
         this.is_editing = true;
-        this.$message('Success!');
+        this.$message(this.$t('common.success'));
         // this.$router.push({ path: '/courses/list' });
       }).catch((error) => {
         console.log('error', error);

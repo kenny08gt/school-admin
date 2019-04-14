@@ -1,27 +1,27 @@
 <template>
   <div class="app-container">
     <el-form ref="form" :model="grade" label-width="120px">
-      <el-form-item label="Grade name">
+      <el-form-item :label="$t('common.name')">
         <el-input v-model="grade.name"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
           <template v-if="is_editing">
-            Save Changes
+            {{$t('common.save-create')}}
           </template>
           <template v-else>
-            Create
+            {{$t('common.create')}}
           </template>
         </el-button>
         <el-button @click="onCancel">
           <template v-if="is_editing">
-            Back
+            {{$t('common.back')}}
           </template>
           <template v-else>
-            Cancel
+            {{$t('common.cancel')}}
           </template>
         </el-button>
-        <el-button v-if="is_editing" @click="newGrade">New Grade</el-button>
+        <el-button v-if="is_editing" @click="newGrade">{{$t('common.new-grade')}}</el-button>
       </el-form-item>
     </el-form>
   </div>
