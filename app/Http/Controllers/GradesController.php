@@ -30,4 +30,10 @@ class GradesController extends Controller
 
         return response(['message' => 'Grade deleted', 'grade' => $grade], 200);
     }
+
+    public function get(Request $request)
+    {
+        $grade = Grade::findOrFail($request->get('grade_id'));
+        return response([$grade->load('courses')->load('students')], 200);
+    }
 }

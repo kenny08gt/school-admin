@@ -9,6 +9,8 @@ export default class Grade {
     this.id = gradeRaw.id;
     this.name = gradeRaw.name;
     this.created_at = gradeRaw.created_at;
+    this.courses = gradeRaw.courses;
+    this.students = gradeRaw.students;
   }
 
   save() {
@@ -24,5 +26,6 @@ new Grade({
   id: 0,
   name: '',
   created_at: '',
+  courses: [],
 });
 

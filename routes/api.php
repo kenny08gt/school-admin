@@ -19,6 +19,7 @@ Route::post('/courses/add', 'CoursesController@add');
 Route::delete('/courses', 'CoursesController@delete');
 
 Route::post('/grades', 'GradesController@getList');
+Route::post('/grades/get', 'GradesController@get');
 Route::post('/grades/add', 'GradesController@add');
 Route::delete('/grades', 'GradesController@delete');
 

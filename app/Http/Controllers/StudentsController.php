@@ -13,7 +13,7 @@ class StudentsController extends Controller
 //
 //        $student->course()->withTimestamps()->sync($request->get('courses'));
 
-        return response([$student->load('course')->load('grade')], 200);
+        return response([$student->load('grade')], 200);
     }
 
     public function getList(Request $request)
@@ -21,14 +21,14 @@ class StudentsController extends Controller
         $limit = $request->get('limit');
         $total = $request->get('total');
 
-        $students = Student::with('course')->with('grade')->get();
+        $students = Student::with('grade')->get();
 
         return response(['items' => $students, 'total' => 10], 200);
     }
 
     public function delete(Request $request)
     {
-        $student = Student::where('id', $request->get('id'))->with('course')->with('grade')->first();
+        $student = Student::where('id', $request->get('id'))->with('grade')->first();
         $student->delete();
 
         return response(['message' => 'Student deleted', 'student' => $student], 200);
