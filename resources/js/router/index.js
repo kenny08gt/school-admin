@@ -21,6 +21,7 @@ import Layout from '../views/layout/Layout';
 import professorRouter from './modules/professors';
 import coursesRouter from './modules/courses';
 import gradesRouter from './modules/grades';
+import studentsRouter from './modules/students';
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -129,18 +130,18 @@ export default new Router({
 
 export const asyncRouterMap = [
   // permissionRouter,
-  // {
-  //   path: '/icon',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/icons/index'),
-  //       name: 'Icons',
-  //       meta: { title: 'icons', icon: 'icon', noCache: true },
-  //     },
-  //   ],
-  // },
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/icons/index'),
+        name: 'Icons',
+        meta: { title: 'icons', icon: 'icon', noCache: true },
+      },
+    ],
+  },
   // componentsRouter,
   // chartsRouter,
   // nestedRouter,
@@ -149,6 +150,7 @@ export const asyncRouterMap = [
   coursesRouter,
   // exampleRouter,
   gradesRouter,
+  studentsRouter,
   // {
   //   path: '/tab',
   //   component: Layout,

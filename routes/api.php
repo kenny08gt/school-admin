@@ -26,6 +26,10 @@ Route::post('/professors', 'ProfessorsController@getList');
 Route::post('/professors/add', 'ProfessorsController@add');
 Route::delete('/professors', 'ProfessorsController@delete');
 
+Route::post('/students', 'StudentsController@getList');
+Route::post('/students/add', 'StudentsController@add');
+Route::delete('/students', 'StudentsController@delete');
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});

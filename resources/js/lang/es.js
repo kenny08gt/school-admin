@@ -28,6 +28,9 @@ export default {
   'edit-professor-modal': {
     'title': 'Editar Profesor',
   },
+  'edit-student-modal': {
+    'title': 'Editar Estudiante',
+  },
   'change-password-modal': {
     'title': 'Cambiar contraseña',
   },
@@ -47,6 +50,7 @@ export default {
     professors: 'Profesores',
     courses: 'Cursos',
     grades: 'Grados',
+    students: 'Estudiantes',
     'Add Course': 'Agregar Curso',
     'List Courses': 'Lista de Cursos',
     'Add Grade': 'Agregar Grado',

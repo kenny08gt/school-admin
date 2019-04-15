@@ -1,8 +1,8 @@
 import { createProfessor } from '../api/professors';
 
 export default class Professor {
-  constructor(gradeRaw) {
-    this.update(gradeRaw);
+  constructor(professorRaw) {
+    this.update(professorRaw);
   }
 
   update(professorRaw) {

@@ -27,6 +27,9 @@ export default {
   'edit-professor-modal': {
     'title': 'Edit Professor',
   },
+  'edit-student-modal': {
+    'title': 'Edit Student',
+  },
   'change-password-modal': {
     'title': 'Change Password',
   },
