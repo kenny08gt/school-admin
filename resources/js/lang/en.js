@@ -27,6 +27,9 @@ export default {
   'edit-professor-modal': {
     'title': 'Edit Professor',
   },
+  'change-password-modal': {
+    'title': 'Change Password',
+  },
   errors: {
     'email-required': 'Please input email address',
     'email-type': 'Please input correct email address',

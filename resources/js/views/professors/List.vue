@@ -29,6 +29,7 @@
       <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
           <el-row>
+            <el-button type="success" icon="el-icon-setting" circle @click="changePassword(scope.row)"></el-button>
             <el-button type="primary" icon="el-icon-edit" circle @click="editProfessor(scope.row)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle @click="deleteProfessorRequest(scope.row)"></el-button>
           </el-row>
@@ -37,6 +38,7 @@
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="professorsListQuery.page" :limit.sync="professorsListQuery.limit" @pagination="getProfessorsList" />
     <edit-professor-modal ref="editProfessorModal" :courses="courses"></edit-professor-modal>
+    <change-password-modal ref="changePasswordModal"></change-password-modal>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ import { fetchList as fetchCoursesList } from '@/api/courses';
 import Pagination from '@core/components/Pagination';
 import Professor from '@/objects/professor';
 import editProfessorModal from './modals/edit';
+import changePasswordProfessorModal from './modals/change-password';
 import Course from '../../objects/course';
 
 export default {
@@ -53,6 +56,7 @@ export default {
   components: {
     Pagination,
     'edit-professor-modal': editProfessorModal,
+    'change-password-modal': changePasswordProfessorModal,
   },
   filters: {
     statusFilter(status) {
@@ -136,6 +140,9 @@ export default {
           });
         });
       });
+    },
+    changePassword(professor) {
+      this.$refs.changePasswordModal.show(professor);
     },
   },
 };
