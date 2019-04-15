@@ -1,32 +1,12 @@
 <template>
   <el-dialog :title="$t('edit-course-modal.title')" :visible.sync="dialogFormVisible">
-    <el-form ref="form" :model="course" label-width="120px">
-      <el-form-item :label="$t('common.name')">
-        <el-input v-model="course.name"/>
-      </el-form-item>
-      <!--<el-form-item label="Grade ">-->
-        <!--<el-select v-model="course.grade_id" placeholder="please select the grades" :multiple="false">-->
-          <!--<el-option v-for="(grade) in grades" :key="grade.key" :value="grade.key" :label="grade.name"/>-->
-        <!--</el-select>-->
-      <!--</el-form-item>-->
-      <el-form-item :label="$t('common.description')">
-        <el-input v-model="course.description" type="textarea"/>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">
-            {{$t('common.save-changes')}}
-        </el-button>
-        <el-button @click="onCancel">
-            {{$t('common.cancel')}}
-        </el-button>
-      </el-form-item>
-    </el-form>
+    <course-form :course="course" :grades="grades" @on_submit="onSubmit" @on_cancel="onCancel"></course-form>
   </el-dialog>
 </template>
 
 <script>
 import { createCourse } from '../../../api/courses';
-
+import courseForm from '../components/form';
 export default {
   name: 'edit-course-modal',
   data() {
@@ -43,6 +23,12 @@ export default {
       prev_grade_id: '',
       prev_description: '',
     };
+  },
+  components: {
+    'course-form': courseForm,
+  },
+  props: {
+    grades: null,
   },
   methods: {
     show(course) {

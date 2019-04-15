@@ -9,8 +9,8 @@ export default class Course {
     this.id = courseRaw.id;
     this.name = courseRaw.name;
     this.created_at = courseRaw.created_at;
-    this.grade_id = courseRaw.grade_id;
     this.description = courseRaw.description;
+    this.grades = courseRaw.grades;
   }
 
   save() {
@@ -26,7 +26,7 @@ new Course({
   id: 0,
   name: '',
   description: '',
-  grape_id: 0,
+  grades: [],
   created_at: '',
 });
 

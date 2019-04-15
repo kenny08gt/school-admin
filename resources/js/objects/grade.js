@@ -2,9 +2,7 @@ import { createGrade } from '../api/grades';
 
 export default class Grade {
   constructor(gradeRaw) {
-    this.id = gradeRaw.id;
-    this.name = gradeRaw.name;
-    this.created_at = gradeRaw.created_at;
+    this.update(gradeRaw);
   }
 
   update(gradeRaw) {

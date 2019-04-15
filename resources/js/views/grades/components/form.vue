@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'form',
+  name: 'grade-form',
   data() {
     return {
     };
