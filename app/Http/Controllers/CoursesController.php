@@ -11,7 +11,7 @@ class CoursesController extends Controller
   public function add(Request $request)
   {
     $course = Course::updateOrCreate(['id' => $request->get('id')], $request->except('grades'));
-    $course->grades()->sync($request->get('grades'));
+    $course->grades()->withTimestamps()->sync($request->get('grades'));
     return response([$course->load('grades')], 200);
   }
 

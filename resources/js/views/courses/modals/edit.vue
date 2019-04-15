@@ -7,6 +7,7 @@
 <script>
 import { createCourse } from '../../../api/courses';
 import courseForm from '../components/form';
+import Course from '../../../objects/course';
 export default {
   name: 'edit-course-modal',
   data() {
@@ -19,6 +20,7 @@ export default {
         grade_id: '',
         description: '',
       },
+      course_clone: null,
       prev_name: '',
       prev_grade_id: '',
       prev_description: '',
@@ -33,9 +35,7 @@ export default {
   methods: {
     show(course) {
       this.course = course;
-      this.prev_name = course.name;
-      this.prev_grade_id = course.grade_id;
-      this.prev_description = course.description;
+      this.course_clone = new Course(JSON.parse(JSON.stringify(this.course)));
       this.dialogFormVisible = true;
     },
     hide() {
@@ -56,9 +56,7 @@ export default {
       });
     },
     onCancel() {
-      this.course.name = this.prev_name;
-      this.course.grade_id = this.prev_grade_id;
-      this.course.description = this.prev_description;
+      this.course.update(this.course_clone);
       this.hide();
     },
   },

@@ -1,38 +1,13 @@
 <template>
   <el-dialog :title="$t('edit-professor-modal.title')" :visible.sync="dialogFormVisible">
-    <el-form ref="form" :model="professor" label-width="120px">
-      <el-form-item :label="$t('common.name')"  :rules="[
-      { required: true, message: 'Please input a name', trigger: 'blur' }]">
-        <el-input v-model="professor.name"/>
-      </el-form-item>
-      <el-form-item :label="$t('common.email')" :rules="[
-      { required: true, message: $t('errors.email-required'), trigger: 'blur' },
-      { type: 'email', message: $t('errors.email-type'), trigger: ['blur', 'change'] }]">
-        <el-input type="email" v-model="professor.email"/>
-      </el-form-item>
-      <!--<el-form-item v-if="!is_editing" label="Passoword" :rules="[-->
-      <!--{ required: true, message: 'Please input a password', trigger: 'blur' },-->
-      <!--{ type: 'password', message: 'Please input a valid password', trigger: ['blur', 'change'] }]">-->
-        <!--<el-input type="password" v-model="professor.password"/>-->
-      <!--</el-form-item>-->
-      <!--<el-form-item label="Role" :rules="[-->
-      <!--{ required: true}]">-->
-        <!--<el-input v-model="professor.role" :disabled="true"/>-->
-      <!--</el-form-item>-->
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">
-          {{$t('common.save-create')}}
-        </el-button>
-        <el-button @click="onCancel">
-          {{$t('common.cancel')}}
-        </el-button>
-      </el-form-item>
-    </el-form>
+    <professor-form :courses="courses" :professor="professor" :is_editing="true" @on_submit="onSubmit" @on_cancel="onCancel"></professor-form>
   </el-dialog>
 </template>
 
 <script>
 import { createProfessor } from '../../../api/professors';
+import professorFrom from '../components/professor-form';
+import Professor from '../../../objects/professor';
 export default {
   name: 'edit-professor-modal',
   data() {
@@ -46,11 +21,19 @@ export default {
         password: '',
         role: 'professor',
       },
+      professor_clone: null,
     };
+  },
+  props: {
+    courses: null,
+  },
+  components: {
+    'professor-form': professorFrom,
   },
   methods: {
     show(professor) {
       this.professor = professor;
+      this.professor_clone = new Professor(JSON.parse(JSON.stringify(this.professor)));
       this.dialogFormVisible = true;
     },
     hide() {
@@ -72,7 +55,7 @@ export default {
       });
     },
     onCancel() {
-      this.professor.name = this.previous_name;
+      this.professor.update(this.professor_clone);
       this.hide();
     },
   },

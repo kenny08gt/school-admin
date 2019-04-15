@@ -7,6 +7,7 @@
 <script>
 import { createGrade } from '../../../api/grades';
 import gradeForm from '../components/form';
+import Grade from '../../../objects/grade';
 export default {
   name: 'edit-grade-modal',
   data() {
@@ -18,12 +19,13 @@ export default {
         id: 0,
         name: '',
       },
+      grade_clone: null,
     };
   },
   methods: {
     show(grade) {
       this.grade = grade;
-      this.previous_name = grade.name;
+      this.grade_clone = new Grade(JSON.parse(JSON.stringify(this.grade)));
       this.dialogFormVisible = true;
     },
     hide() {
@@ -45,7 +47,7 @@ export default {
       });
     },
     onCancel() {
-      this.grade.name = this.previous_name;
+      this.grade.update(this.grade_clone);
       this.hide();
     },
   },

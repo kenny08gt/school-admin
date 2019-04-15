@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+    <el-table v-loading="professorsListLoading" :data="professorsList" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
@@ -21,6 +21,11 @@
           <span>{{ scope.row.created_at | moment("LL") }}</span>
         </template>
       </el-table-column>
+      <el-table-column align="left" :label="$t('common.course')+'s'">
+        <template slot-scope="scope">
+          <el-tag style="margin: 2px;" v-for="course in scope.row.courses" :key="course.id">{{ course.name }}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
           <el-row>
@@ -30,16 +35,18 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-    <edit-professor-modal ref="editProfessorModal"></edit-professor-modal>
+    <pagination v-show="total>0" :total="total" :page.sync="professorsListQuery.page" :limit.sync="professorsListQuery.limit" @pagination="getProfessorsList" />
+    <edit-professor-modal ref="editProfessorModal" :courses="courses"></edit-professor-modal>
   </div>
 </template>
 
 <script>
 import { fetchList, deleteProfessor } from '@/api/professors';
+import { fetchList as fetchCoursesList } from '@/api/courses';
 import Pagination from '@core/components/Pagination';
 import Professor from '@/objects/professor';
 import editProfessorModal from './modals/edit';
+import Course from '../../objects/course';
 
 export default {
   name: 'gradesList',
@@ -59,38 +66,51 @@ export default {
   },
   data() {
     return {
-      list: null,
+      professorsList: null,
       total: 0,
-      listLoading: true,
-      listQuery: {
+      courses: null,
+      professorsListLoading: true,
+      professorsListQuery: {
         page: 1,
         limit: 20,
       },
     };
   },
   created() {
-    this.getList();
+    this.getProfessorsList();
+    this.getCoursesList();
   },
   methods: {
-    getList() {
-      this.listLoading = true;
-      fetchList(this.listQuery).then(response => {
-        this.list = response.items.map(function(item, index) {
+    getProfessorsList() {
+      this.professorsListLoading = true;
+      fetchList(this.professorsListQuery).then(response => {
+        this.professorsList = response.items.map(function(item, index) {
           return new Professor(item);
         });
         this.total = response.total;
-        this.listLoading = false;
+        this.professorsListLoading = false;
+      }).catch((error) => {
+        console.log('error', error);
+      });
+    },
+    getCoursesList() {
+      this.professorsListLoading = true;
+      fetchCoursesList().then(response => {
+        this.courses = response.items.map(function(item, index) {
+          return new Course(item);
+        });
+        this.professorsListLoading = false;
       }).catch((error) => {
         console.log('error', error);
       });
     },
     handleSizeChange(val) {
-      this.listQuery.limit = val;
-      this.getList();
+      this.professorsListQuery.limit = val;
+      this.getProfessorsList();
     },
     handleCurrentChange(val) {
-      this.listQuery.page = val;
-      this.getList();
+      this.professorsListQuery.page = val;
+      this.getProfessorsList();
     },
     editProfessor(professor) {
       this.$refs.editProfessorModal.show(professor);
@@ -102,8 +122,8 @@ export default {
         type: 'warning',
       }).then(() => {
         deleteProfessor(professor).then((data) => {
-          const index = this.list.indexOf(professor);
-          this.list.splice(index, 1);
+          const index = this.professorsList.indexOf(professor);
+          this.professorsList.splice(index, 1);
           this.$message({
             type: 'success',
             message: 'Delete completed',

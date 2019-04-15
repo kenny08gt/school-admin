@@ -10,8 +10,12 @@ class ProfessorsController extends Controller
     public function add(Request $request)
     {
         $request['password'] = bcrypt($request->get('password'));
-        $user = User::updateOrCreate(['id' => $request->get('id')], $request->all());
-        return response([$user], 200);
+        $user = User::updateOrCreate(['id' => $request->get('id')], $request->except('courses'));
+
+        if($user->role == User::PROFESSOR_ROLE)
+            $user->courses()->withTimestamps()->sync($request->get('courses'));
+
+        return response([$user->load('courses')], 200);
     }
 
     public function getList(Request $request)
@@ -19,7 +23,7 @@ class ProfessorsController extends Controller
         $limit = $request->get('limit');
         $total = $request->get('total');
 
-        $users = User::where('role', User::PROFESSOR_ROLE)->get();
+        $users = User::where('role', User::PROFESSOR_ROLE)->with('courses')->get();
 
         return response(['items' => $users, 'total' => 10], 200);
     }

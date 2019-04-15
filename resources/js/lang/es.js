@@ -13,6 +13,7 @@ export default {
     'created-at': 'Creado el',
     'actions': 'Acciones',
     'grade': 'Grado',
+    'course': 'Curso',
     'new-course': 'Crear otro curso',
     'new-grade': 'Crear otro curso',
     'success': 'Exito!',

@@ -3,9 +3,9 @@
     <el-form-item :label="$t('common.name')">
       <el-input v-model="course.name"/>
     </el-form-item>
-    <el-form-item label="Grade ">
-      <el-select v-model="course.grades" placeholder="please select the grades" :multiple="true">
-        <el-option v-for="(grade) in grades" :key="grade.id" :value="grade.id" :label="grade.name"/>
+    <el-form-item :label="$t('common.grade')">
+      <el-select v-model="selected_grades" placeholder="please select the grades" :multiple="true">
+        <el-option v-for="(grade) in grades" :key="'grade-'+grade.id" :value="grade.id" :label="grade.name"/>
       </el-select>
     </el-form-item>
     <el-form-item :label="$t('common.description')">
@@ -29,8 +29,19 @@ export default {
     course: null,
     grades: null,
   },
+  data() {
+    return {
+      selected_grades: null,
+    };
+  },
+  created() {
+    this.selected_grades = this.course.grades.map(function(item) {
+      return item.id;
+    });
+  },
   methods: {
     onSubmit() {
+      this.course.grades = this.selected_grades;
       this.$emit('on_submit');
     },
     onCancel() {
