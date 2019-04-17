@@ -28,6 +28,7 @@ Route::post('/professors/add', 'ProfessorsController@add');
 Route::delete('/professors', 'ProfessorsController@delete');
 
 Route::post('/students', 'StudentsController@getList');
+Route::post('/students/get', 'StudentsController@get');
 Route::post('/students/add', 'StudentsController@add');
 Route::delete('/students', 'StudentsController@delete');
 

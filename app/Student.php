@@ -8,9 +8,10 @@ class Student extends Model
 {
     protected $guarded = [];
 
-    public function course()
+    public function courses()
     {
-        return $this->belongsToMany(Course::class, 'student_courses','student_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'student_courses','student_id', 'course_id')
+            ->withPivot(['score']);
     }
 
     public function grade()

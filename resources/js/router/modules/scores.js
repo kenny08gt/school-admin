@@ -17,6 +17,12 @@ const scoreRouter = {
       name: 'grade',
       meta: { title: 'Per Grade', noCache: true },
     },
+    {
+      path: 'report',
+      component: () => import('@/views/scores/report'),
+      name: 'report',
+      meta: { title: 'Report', noCache: true },
+    },
   ],
 };
 

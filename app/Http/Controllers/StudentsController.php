@@ -73,4 +73,12 @@ class StudentsController extends Controller
 
         return response([$response], 200);
     }
+
+    public function get(Request $request)
+    {
+        $grade_id = $request->get('grade_id');
+        $grade = Grade::findOrFail($grade_id);
+        $students = $grade->students->load('courses', 'grade');
+        return response([$students], 200);
+    }
 }

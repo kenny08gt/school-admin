@@ -16,6 +16,8 @@ export default {
     'new-course': 'New Course',
     'new-grade': 'New Grade',
     'success': 'Success!',
+    'generate': 'Generate',
+    'print': 'Print',
     'delete-message': 'This will permanently delete this. Continue?',
   },
   'edit-course-modal': {

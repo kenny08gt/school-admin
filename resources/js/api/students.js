@@ -1,5 +1,13 @@
 import request from '@/utils/request';
 
+export function fetch(query) {
+  return request({
+    url: '/students/get',
+    method: 'post',
+    params: query,
+  });
+}
+
 export function fetchList(query) {
   return request({
     url: '/students',

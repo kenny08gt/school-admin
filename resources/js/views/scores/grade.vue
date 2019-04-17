@@ -9,12 +9,8 @@
         :value="grade.id">
       </el-option>
     </el-select>
-    <el-table v-loading="studentsLoading" :data="studentsList" border fit highlight-current-row style="width: 100%">
-      <el-table-column
-        type="index"
-        width="50">
-      </el-table-column>
-      <el-table-column align="center" label="ID" width="80">
+    <el-table v-loading="studentsLoading" :data="studentsList" border height="calc(100vh - 250px)" fit highlight-current-row style="width: 100%">
+      <el-table-column align="center" label="ID" width="80" fixed>
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
@@ -187,10 +183,8 @@ export default {
 </script>
 
 <style scoped>
-  .chart-container{
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 84px);
+  input {
+    padding: 5px;
   }
 </style>
 

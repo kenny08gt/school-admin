@@ -17,6 +17,8 @@ export default {
     'new-course': 'Crear otro curso',
     'new-grade': 'Crear otro curso',
     'success': 'Exito!',
+    'generate': 'Generar',
+    'print': 'Imprimir',
     'delete-message': 'Esto será borrado permanentemente. Desea continuar?',
   },
   'edit-course-modal': {

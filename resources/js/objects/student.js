@@ -12,6 +12,7 @@ export default class Student {
     this.created_at = studentRaw.created_at;
     this.grade = studentRaw.grade;
     this.grade_id = studentRaw.grade_id;
+    this.courses = studentRaw.courses;
   }
 
   save() {
@@ -28,5 +29,6 @@ new Student({
   name: '',
   picture: '',
   grade: null,
+  courses: [],
 });
 
