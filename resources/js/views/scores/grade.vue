@@ -10,6 +10,10 @@
       </el-option>
     </el-select>
     <el-table v-loading="studentsLoading" :data="studentsList" border fit highlight-current-row style="width: 100%">
+      <el-table-column
+        type="index"
+        width="50">
+      </el-table-column>
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
@@ -22,9 +26,10 @@
       </el-table-column>
       <el-table-column align="left" label="Courses">
         <template>
-          <el-table-column align="left" :label="course.name" v-for="course in grade.courses" :key="course.id">
+          <el-table-column align="left" :label="course.name" v-for="(course, key) in grade.courses" :key="course.id">
             <template slot-scope="scope">
-              <input type="number" name="score" class="el-input__inner" v-model="scores.student[scope.row.id+'.'+course.id]" @input="debounceInput">
+              <input type="number" name="score" class="el-input__inner" :tabindex="((tab_index)*grade.courses.length + key)"
+                     v-model="scores.student[scope.row.id+'.'+course.id]" @input="debounceInput">
             </template>
           </el-table-column>
         </template>
@@ -35,7 +40,7 @@
         <el-button type="primary" @click="saveChanges">
           {{$t('common.save-changes')}}
         </el-button>
-        <el-button @click="this.$router.back();">
+        <el-button @click="$router.back()">
           {{$t('common.back')}}
         </el-button>
       </el-col>
@@ -80,6 +85,7 @@ export default {
         limit: 20,
       },
       showing_warning: null,
+      tab_index: 1,
     };
   },
   created() {
