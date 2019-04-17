@@ -38,6 +38,11 @@ class StudentsController extends Controller
         $scores = json_decode($request->get('student'), true);
 
         foreach ($scores as $key => $score) {
+            if($score > 100)
+                $score = 100;
+            if($score < 0)
+                $score = 0;
+
             list($student_id, $course_id) = explode('.', $key);
             DB::insert('INSERT INTO student_courses (student_id, course_id, score, created_at, updated_at) 
                                 VALUES (?, ?, ?, ?, ?) 

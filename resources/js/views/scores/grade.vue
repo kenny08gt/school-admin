@@ -79,16 +79,12 @@ export default {
         page: 1,
         limit: 20,
       },
-      changes_saved: true,
+      showing_warning: null,
     };
   },
   created() {
     this.getGradesList();
-    this.$message({
-      message: 'Changes need to be saved!',
-      type: 'info',
-      duration: this.changes_saved ? 1 : 0,
-    });
+    window.addEventListener('beforeunload', this.windowUnload);
   },
   methods: {
     getGradesList() {
@@ -120,16 +116,17 @@ export default {
     },
     generateScoresList(student) {
       const $this = this;
-      fetchScores({ grade_id: $this.grade.id }).then(response => {
-        console.log('response', response[0]);
-        $this.scores = response[0];
-        console.log('scores', $this.scores);
-        if ($this.scores.length === 0) {
-          $this.scores = JSON.parse(localStorage.getItem('scores.' + $this.grade.id));
-        }
-      }).catch((error) => {
-        console.log('error', error);
-      });
+      if (localStorage.getItem('scores.' + $this.grade.id)) {
+        $this.scores = JSON.parse(localStorage.getItem('scores.' + $this.grade.id));
+        $this.showChangesNeedsToBeSaved();
+      } else {
+        this.hideChangesNeedsToBeSaved();
+        fetchScores({ grade_id: $this.grade.id }).then(response => {
+          $this.scores = response[0];
+        }).catch((error) => {
+          console.log('error', error);
+        });
+      }
     },
     handleSizeChange(val) {
       this.studentsListQuery.limit = val;
@@ -140,17 +137,44 @@ export default {
       this.getProfessorsList();
     },
     debounceInput: debounce(function (e) {
-      this.changes_saved = false;
+      if (!this.showing_warning) {
+        this.showChangesNeedsToBeSaved();
+      }
       localStorage.setItem('scores.' + this.scores.grade_id, JSON.stringify(this.scores));
     }, 3000),
+    showChangesNeedsToBeSaved() {
+      this.showing_warning = this.$notify.success({
+        title: 'Info',
+        message: 'Changes needs to be saved!',
+        showClose: false,
+        duration: 0,
+      });
+    },
+    hideChangesNeedsToBeSaved() {
+      if (this.showing_warning) {
+        this.showing_warning.close();
+        this.showing_warning = null;
+      }
+    },
     saveChanges() {
       updateScores(this.scores).then(response => {
         this.$message('Success!');
-        this.changes_saved = true;
+        this.hideChangesNeedsToBeSaved();
         localStorage.removeItem('scores.' + this.scores.grade_id);
       }).catch((error) => {
         console.log('error', error);
       });
+    },
+    windowUnload(event) {
+      if (this.showing_warning) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.$notify({
+          title: 'Warning',
+          message: 'You need to save your changes first!',
+          duration: 0,
+        });
+      }
     },
   },
 };
