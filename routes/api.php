@@ -31,6 +31,9 @@ Route::post('/students', 'StudentsController@getList');
 Route::post('/students/add', 'StudentsController@add');
 Route::delete('/students', 'StudentsController@delete');
 
+Route::post('/scores', 'StudentsController@updateScores');
+Route::post('/scores/get', 'StudentsController@getScores');
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});

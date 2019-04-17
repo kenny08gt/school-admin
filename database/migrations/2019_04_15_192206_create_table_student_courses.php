@@ -17,6 +17,7 @@ class CreateTableStudentCourses extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('course_id');
+            $table->integer('score')->default(0);
             $table->timestamps();
 
             $table->foreign('course_id')

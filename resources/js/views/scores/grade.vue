@@ -21,22 +21,35 @@
         </template>
       </el-table-column>
       <el-table-column align="left" label="Courses">
-        <template >
-            <el-table-column v-for="course in grade.courses" :key="course.id" :label="course.name">
-              <template >
-                <el-input-number :precision="2" :step="0.1" :max="100"></el-input-number>
-              </template>
-            </el-table-column>
+        <template>
+          <el-table-column align="left" :label="course.name" v-for="course in grade.courses" :key="course.id">
+            <template slot-scope="scope">
+              <input type="number" name="score" class="el-input__inner" v-model="scores.student[scope.row.id+'.'+course.id]" @input="debounceInput">
+            </template>
+          </el-table-column>
         </template>
       </el-table-column>
     </el-table>
+    <el-row v-if="grade.id" style="margin-top: 10px; text-align: right;">
+      <el-col :span="24">
+        <el-button type="primary" @click="saveChanges">
+          {{$t('common.save-changes')}}
+        </el-button>
+        <el-button @click="this.$router.back();">
+          {{$t('common.back')}}
+        </el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import { fetch, fetchList as fetchGradesList } from '@/api/grades';
+import { update as updateScores, fetch as fetchScores } from '@/api/scores';
 import Student from '../../objects/student';
 import Grade from '../../objects/grade';
+import { debounce } from 'debounce';
+
 export default {
   name: 'gradesList',
   components: {
@@ -46,7 +59,18 @@ export default {
       studentsList: null,
       total: 0,
       courses: null,
+      current_course: {
+        id: 0,
+        name: '',
+      },
       studentsLoading: false,
+      scores: {
+        grade_id: 0,
+        student: {
+          id: 0,
+          score: 0,
+        },
+      },
       grades: [],
       grade: {
         courses: [],
@@ -55,10 +79,16 @@ export default {
         page: 1,
         limit: 20,
       },
+      changes_saved: true,
     };
   },
   created() {
     this.getGradesList();
+    this.$message({
+      message: 'Changes need to be saved!',
+      type: 'info',
+      duration: this.changes_saved ? 1 : 0,
+    });
   },
   methods: {
     getGradesList() {
@@ -71,15 +101,32 @@ export default {
       });
     },
     getGradeInformation() {
+      const $this = this;
       this.studentsLoading = true;
       fetch({ grade_id: this.grade.id }).then(response => {
         // console.log('response', response);
         this.grade = new Grade(response[0]);
+        this.scores.grade_id = this.grade.id;
+        this.scores.student = {};
 
-        this.studentsList = this.grade.students.map(function(item, index) {
-          return new Student(item);
+        this.studentsList = this.grade.students.map(function(student, index) {
+          return new Student(student);
         });
+        $this.generateScoresList();
         this.studentsLoading = false;
+      }).catch((error) => {
+        console.log('error', error);
+      });
+    },
+    generateScoresList(student) {
+      const $this = this;
+      fetchScores({ grade_id: $this.grade.id }).then(response => {
+        console.log('response', response[0]);
+        $this.scores = response[0];
+        console.log('scores', $this.scores);
+        if ($this.scores.length === 0) {
+          $this.scores = JSON.parse(localStorage.getItem('scores.' + $this.grade.id));
+        }
       }).catch((error) => {
         console.log('error', error);
       });
@@ -91,6 +138,19 @@ export default {
     handleCurrentChange(val) {
       this.studentsListQuery.page = val;
       this.getProfessorsList();
+    },
+    debounceInput: debounce(function (e) {
+      this.changes_saved = false;
+      localStorage.setItem('scores.' + this.scores.grade_id, JSON.stringify(this.scores));
+    }, 3000),
+    saveChanges() {
+      updateScores(this.scores).then(response => {
+        this.$message('Success!');
+        this.changes_saved = true;
+        localStorage.removeItem('scores.' + this.scores.grade_id);
+      }).catch((error) => {
+        console.log('error', error);
+      });
     },
   },
 };
