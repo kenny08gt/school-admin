@@ -128,7 +128,11 @@ export default {
       const element = document.getElementById('scoresReport');
       // html2pdf(document.getElementById('scoresReport'));
       html2pdf().from(element).set({
-        pagebreak: { mode: 'avoid-all', before: '#scoreReport' },
+        pagebreak: {
+          mode: 'avoid-all',
+          before: '#scoreReport',
+        },
+        html2canvas: { dpi: 96, letterRendering: true },
       }).save('scores_report_' + this.grade.id);
     },
   },
